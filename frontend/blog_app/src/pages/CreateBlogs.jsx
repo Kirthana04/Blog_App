@@ -50,7 +50,7 @@ export default function CreateBlog() {
 
     if (!formData.description.trim()) {
       newErrors.description = "Description is required";
-    } else if (formData.description.length > 200) {
+    } else if (formData.description.length > 400) {
       newErrors.description = "Description must be under 200 characters";
     }
 
@@ -64,7 +64,7 @@ export default function CreateBlog() {
         .map((tag) => tag.trim())
         .filter(Boolean);
 
-      if (tagList.length > 5) {
+      if (tagList.length > 8) {
         newErrors.tags = "You can only add up to 5 tags";
       }
     }

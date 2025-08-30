@@ -121,8 +121,8 @@ export default function AuthPage() {
 
   return (
     // Root: remove h-screen/grid so it fits nicely in modal, make card shape
-    <div className="flex justify-center items-center w-full">
-      <div className="w-full max-w-sm sm:max-w-md rounded-xl shadow-xl border border-base-200 bg-base-100 p-2 sm:p-8">
+    <div className="flex justify-center items-center w-full border-gray-300">
+      <div className="w-full max-w-sm sm:max-w-md rounded-xl shadow-xl border border-base-300 bg-base-200 p-2 sm:p-8">
         <div className="space-y-8">
           {/* Title */}
           <div className="text-center mb-8">

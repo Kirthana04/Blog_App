@@ -10,6 +10,16 @@ export default function HomePage() {
   const navigate = useNavigate(); // <-- add this
 
   // Fetch blogs from backend
+  // Navigate to login page when Login button is clicked
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
+  // On blog click open the login popup instead of alert
+  const handleBlogClick = () => {
+    setShowLogin(true);
+  };
+
   useEffect(() => {
     async function fetchBlogs() {
       setLoading(true);
@@ -17,7 +27,6 @@ export default function HomePage() {
         const response = await fetch("http://localhost:8000/blogs/");
         if (!response.ok) throw new Error("Failed to fetch blogs");
         const data = await response.json();
-
         // Slice to limit to 12 blogs
         const limitedBlogs = data.slice(0, 12);
         setBlogs(limitedBlogs);
@@ -31,16 +40,6 @@ export default function HomePage() {
     fetchBlogs();
   }, []);
 
-  // Navigate to login page when Login button is clicked
-  const handleLoginClick = () => {
-    navigate("/login");
-  };
-
-  // On blog click open the login popup instead of alert
-  const handleBlogClick = () => {
-    setShowLogin(true);
-  };
-
   return (
     <div>
       {/* Header */}
@@ -52,6 +51,7 @@ export default function HomePage() {
           backgroundColor: "#9CA3AF",
           color: "white",
           alignItems: "center",
+          position: "relative"
         }}
       >
         <img
@@ -59,21 +59,34 @@ export default function HomePage() {
           alt="Placeholder"
           style={{
             display: "block",
-            width: "100%",
-            maxWidth: "200px",
-            margin: "2rem 0 2rem 0",
+            width: "500%",
+            maxWidth: "150px",
+            margin: "1rem 0 1rem 0"
           }}
         />
-        <h2 className="mr-110"
+        <h2 className="mr-120"
           style={{
             fontFamily: "'Pinyon Script', cursive",
             textAlign: "center",
             fontSize: "7rem",
-            fontWeight: "normal",
+            fontWeight: "normal"
           }}
         >
           BlogStudio.
         </h2>
+        {/* Login SVG on right side */}
+        <div
+          style={{
+            position: "absolute",
+            top: "1.5rem",
+            right: "2rem",
+            cursor: "pointer",
+            zIndex: 10
+          }}
+          onClick={() => setShowLogin(true)}
+        >
+          <img src="/Login.svg" alt="Login" style={{ width: "150px", height: "150px" }} />
+        </div>
       </header>
 
       {showLogin && (
@@ -88,6 +101,7 @@ export default function HomePage() {
             paddingTop: "10vh", // push popup a bit lower from very top
             zIndex: 9999,
           }}
+          onClick={() => setShowLogin(false)}
         >
           <div
             style={{
@@ -97,27 +111,10 @@ export default function HomePage() {
               borderRadius: "14px",
               maxWidth: "420px",
               width: "100%",
-              boxShadow: "0 8px 28px rgba(0,0,0,0.28)",
+              boxShadow: "0 8px 28px rgba(0,0,0,0.28)"
             }}
+            onClick={e => e.stopPropagation()}
           >
-            <button
-              onClick={() => setShowLogin(false)}
-              aria-label="Close"
-              style={{
-                position: "absolute",
-                top: "6px",
-                right: "8px",
-                fontSize: "1.25rem",
-                cursor: "pointer",
-                background: "transparent",
-                border: "none",
-                lineHeight: 1,
-                padding: 0,
-                color: "#555",
-              }}
-            >
-              ✕
-            </button>
             <AuthComp />
           </div>
         </div>
@@ -140,7 +137,7 @@ export default function HomePage() {
           blogs.map((blog) => (
             <div
               key={blog.id}
-              onClick={handleBlogClick} // Just alert for now
+              onClick={handleBlogClick}
               style={{
                 border: "1px solid #ddd",
                 borderRadius: "8px",

@@ -43,13 +43,13 @@ export default function Sidebar() {
         </Link>
         <button
           onClick={handleLogout}
-          className="px-4 py-2 text-white rounded text-left hover:bg-gray-500"
+          className="px-2 py-2 text-white rounded text-left hover:bg-gray-500"
         >
           Logout
         </button>
       </nav>
 
-      <style jsx>{`
+  <style>{`
         .switch {
           position: relative;
           display: inline-block;

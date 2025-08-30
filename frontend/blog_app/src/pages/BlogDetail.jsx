@@ -27,18 +27,18 @@ export default function BlogDetail() {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="flex-1 overflow-y-auto p-6 max-w-3xl mx-auto mt-10 ">
-        <Card className="shadow-lg bg-gray-100">
+      <div className="flex-1 overflow-y-auto p-6 max-w-3xl mx-auto mt-10 w-full" style={{width: '100%', maxWidth: '1000px'}}>
+        <Card className="shadow-lg bg-gray-100 w-full">
           <CardHeader>
             <CardTitle className="text-3xl font-bold text-center text-gray-700">{blog.title}</CardTitle>
             <CardDescription className="text-gray-700 text-center">{blog.description}</CardDescription>
           </CardHeader>
-          <CardContent className="text-gray-700 text-center text-lg">
+          <CardContent className="text-gray-700 justify-center text-lg">
             {blog.image && (
               <img
                 src={`http://localhost:8000${blog.image}`}
                 alt={blog.title}
-                className="w-full h-64 object-cover rounded-lg mb-6"
+                className="w-full object-cover rounded-lg mb-6 h-auto"
               />
             )}
             <p className="whitespace-pre-wrap">{blog.contents}</p>
@@ -48,7 +48,7 @@ export default function BlogDetail() {
                       {blog.tags?.map((tag, index) => (
                         <span
                           key={index}
-                          className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full"
+                          className=" bg-gray-500 text-gray-50 text-xs px-2 py-1 rounded-full"
                         >
                           #{tag}
                         </span>

@@ -62,10 +62,6 @@ async def delete_blog(blog_id: int, user=Depends(get_current_user), pool=Depends
         }
     return result
 
-@router.put("/restore/{blog_id}", response_model=dict)
-async def restore_blog(blog_id: int, user=Depends(get_current_user), pool=Depends(get_db_pool)):
-    return await blog_service.restore_blog(pool, blog_id=blog_id, user_id=user["user_id"])
-
 @router.get("/{blog_id}", response_model=BlogResponse)
 async def get_blog(blog_id: int, pool=Depends(get_db_pool)):
     blog = await blog_service.get_blog_by_id(pool, blog_id)

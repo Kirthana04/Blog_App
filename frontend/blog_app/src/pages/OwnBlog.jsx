@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 export default function OwnBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Remove error state
 
   // Assuming token is stored in localStorage
   const token = localStorage.getItem("access_token");
@@ -28,14 +28,18 @@ export default function OwnBlogs() {
       },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch your blogs");
+        if (!res.ok) {
+          // Auto-logout and redirect on error
+          localStorage.removeItem("access_token");
+          window.location.href = "/";
+          alert("Session expired! Please log in again.");
+          return;
+        }
         return res.json();
       })
       .then((data) => {
-        setBlogs(data);
-        setError(null);
+        if (data) setBlogs(data);
       })
-      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, [token]);
 
@@ -64,7 +68,6 @@ export default function OwnBlogs() {
   }
 
   if (loading) return <div>Loading your blogs...</div>;
-  if (error) return <div>Error: {error}</div>;
   if (blogs.length === 0) return <div>You have no blogs yet.</div>;
 
   return (
@@ -76,37 +79,35 @@ export default function OwnBlogs() {
             My Blogs .
           </h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-4 lg:grid-cols-4 gap-6 -mt-4 p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
             {blogs.map((blog) => (
               <Link key={blog.id} to={`/blogs/${blog.id}`}>
                 <Card
                   key={blog.id}
-                  className="hover:shadow-lg transition-shadow bg-gray-100"
+                  className="shadow-lg hover:shadow-xl transition-shadow duration-200 cursor-pointer bg-gray-200"
                 >
                   <CardHeader>
-                  <CardTitle>{blog.title}</CardTitle>
-                </CardHeader>
+                    <CardTitle  className="text-center text-gray-700 font-bold text-lg ">{blog.title}</CardTitle>
+                  </CardHeader>
 
                 <CardContent>
-                  <p className="mb-2 font-medium">{blog.description}</p>
+                  <p className="text-center text-gray-700 -mt-4">{blog.description}</p>
 
                   {blog.image && (
                     <img
                       src={`http://localhost:8000${blog.image}`}
                       alt={blog.title}
-                      className="mb-4 rounded"
+                      className=" mt-4 mb-4 rounded"
                       style={{ maxWidth: "100%" }}
                     />
                   )}
-
-                  <p className="mb-2">{blog.contents}</p>
 
                   {blog.tags && blog.tags.length > 0 && (
                    <div className="flex flex-wrap gap-2 mt-2">
                       {blog.tags?.map((tag, index) => (
                         <span
                           key={index}
-                          className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full"
+                          className="bg-gray-500 text-gray-100 text-xs font-semibold px-2 py-1 rounded-full"
                         >
                           #{tag}
                         </span>
