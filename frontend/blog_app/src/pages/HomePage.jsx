@@ -136,6 +136,7 @@ export default function HomePage() {
         ) : (
           blogs.map((blog) => (
             <div
+              className="bg-gray-200"
               key={blog.id}
               onClick={handleBlogClick}
               style={{
@@ -148,10 +149,10 @@ export default function HomePage() {
               <img
                 src={`http://localhost:8000${blog.image}`}
                 alt={blog.title}
-                style={{ width: "100%", borderRadius: "6px" }}
+                style={{ width: "100%", height: "16rem", borderRadius: "6px" }}
               />
-              <h3 className="text-lg font-semibold text-gray-700 text-center" style={{ marginTop: "0.5rem" }}>{blog.title}</h3>
-              <p className="text-gray-600 text-center">{blog.description}</p>
+              <h3 className="text-lg font-semibold text-gray-800 text-center" style={{ marginTop: "0.5rem" }}>{blog.title}</h3>
+              <p className="text-gray-700 text-center">{blog.description}</p>
             </div>
           ))
         )}
