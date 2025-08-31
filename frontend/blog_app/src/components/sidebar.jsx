@@ -41,6 +41,9 @@ export default function Sidebar() {
         <Link to="/createblogs" className="hover:bg-gray-500 p-2 rounded">
           Create Blogs
         </Link>
+        <Link to="/chat" className="hover:bg-gray-500 p-2 rounded">
+          BloQ
+        </Link>
         <button
           onClick={handleLogout}
           className="px-2 py-2 text-white rounded text-left hover:bg-gray-500"

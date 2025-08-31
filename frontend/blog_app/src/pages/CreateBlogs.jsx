@@ -128,10 +128,11 @@ export default function CreateBlog() {
   return (
     <div className="flex h-screen">
       <Sidebar />
-      <div className="flex-1 overflow-y-auto p-6 max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-10 text-gray-500">
-          Create New Blog .
-        </h1>
+
+      <h1 className="text-3xl font-bold mb-10 text-left ml-5 mt-6 text-gray-500">
+        Create New Blog .
+      </h1>
+      <div className="flex-1 overflow-y-auto p-6 max-w-3xl mt-20 -ml-15 mx-auto">
         <form
           onSubmit={handleSubmit}
           className="max-w-3xl mx-auto p-6 space-y-6 bg-gray-100 rounded-md shadow"

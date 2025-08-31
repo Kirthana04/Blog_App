@@ -4,6 +4,7 @@ import BlogFeed from "./pages/BlogFeed";
 import BlogDetail from "./pages/BlogDetail";
 import OwnBlogs from "./pages/OwnBlog";
 import CreateBlog from "./pages/CreateBlogs";
+import ChatPage from "./pages/ChatPage";
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/blogs/:id" element={<BlogDetail />} />
         <Route path="/ownblog" element={<OwnBlogs />} />
         <Route path="/createblogs" element={<CreateBlog />} />
+        <Route path="/chat" element={<ChatPage />} />
       </Routes>
     </Router>
   );
