@@ -65,7 +65,7 @@ export default function CreateBlog() {
         .filter(Boolean);
 
       if (tagList.length > 8) {
-        newErrors.tags = "You can only add up to 5 tags";
+        newErrors.tags = "You can only add up to 8 tags";
       }
     }
 
